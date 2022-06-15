@@ -32,7 +32,7 @@ public class ShortestPath {
 			if (!g.isDirected() && !settled.contains(u)) {
 				settled.add(u);
 			}
-			generateChilds(u, g.isDirected());
+			adjacentList(u, g.isDirected());
 		}
 		
 		for(int i = 0; i < dist.length; i++) {
@@ -40,7 +40,7 @@ public class ShortestPath {
 		}
 	}
 	
-	private void generateChilds(int u, boolean directed) {
+	private void adjacentList(int u, boolean directed) {
 		for(Connection c : g.getVertexes().get(u).getConnections()) {
 			int id = c.getVertexFinal().getId();
 			int distance = dist[u] + c.getCost();
