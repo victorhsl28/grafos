@@ -5,8 +5,9 @@ public class Main {
 	public static int[][] d;
 
 	public static void main(String[] args) {
+		execute("grafo01.txt", false);
+		System.out.println();
 		execute("grafo02.txt", true);
-		
 	}
 	
 	public static void execute(String path, boolean directed) {
@@ -19,7 +20,7 @@ public class Main {
 		
 		//computing shortest path ====================================
 		System.out.println("\n[2] Computing shortest path...");
-		for(int i = 1; i <= g.getVertexes().keySet().size(); i++) {
+		for(int i = 0; i < g.getVertexes().keySet().size(); i++) {
 			new ShortestPath(g, i);
 		}
 		

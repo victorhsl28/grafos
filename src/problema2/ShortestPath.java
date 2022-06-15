@@ -17,7 +17,7 @@ public class ShortestPath {
 		dist = new int[size];
 		queue = new PriorityQueue<Vertex>(size, new Vertex());
 		settled = new HashSet<Integer>();
-		dijkstra(g, source - 1, size);
+		dijkstra(g, source, size);
 	}
 	
 	public void dijkstra(Graph g, int source, int size) {	
@@ -29,10 +29,10 @@ public class ShortestPath {
 		
 		while(!queue.isEmpty()) {	
 			int u = queue.poll().getId();
-			if (!settled.contains(u)) {
+			if (!g.isDirected() && !settled.contains(u)) {
 				settled.add(u);
-				generateChilds(u);
-			}			
+			}
+			generateChilds(u, g.isDirected());
 		}
 		
 		for(int i = 0; i < dist.length; i++) {
@@ -40,17 +40,13 @@ public class ShortestPath {
 		}
 	}
 	
-	private void generateChilds(int u) {
+	private void generateChilds(int u, boolean directed) {
 		for(Connection c : g.getVertexes().get(u).getConnections()) {
 			int id = c.getVertexFinal().getId();
-			
-			if (!settled.contains(id)) {
-				int distance = dist[u] + c.getCost();
-				
-				if (distance < dist[id]) {
-					dist[id] = distance;
-					queue.add(c.getVertexFinal());
-				}				
+			int distance = dist[u] + c.getCost();
+			if (distance < dist[id]) {
+				dist[id] = distance;
+				queue.add(c.getVertexFinal());
 			}
 		}
 	}

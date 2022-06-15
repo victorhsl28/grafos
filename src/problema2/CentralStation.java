@@ -6,7 +6,7 @@ import java.util.List;
 public class CentralStation {
 	
 	public static int getCentralStation(int[] distVec, int[] maxVec) {
-		int maxDist = getHigher(distVec);
+		int maxDist = getLower(distVec);
 		List<String> line = new LinkedList<>();
 		for(int i = 0; i < distVec.length; i++) {
 			if(distVec[i] == maxDist) {
@@ -17,7 +17,7 @@ public class CentralStation {
 		if(line.size() == 1) {
 			return (Integer.valueOf(line.get(0)) + 1);
 		} else {
-			int maxVecc = getHigher(maxVec);
+			int maxVecc = getLower(maxVec);
 			for(String s : line) {
 				if(maxVec[Integer.valueOf(s)] == maxVecc)
 					return (Integer.valueOf(s) + 1);
@@ -26,14 +26,14 @@ public class CentralStation {
 		return -1;
 	}
 	
-	private static int getHigher(int[] vector) {
-		int higher = Integer.MIN_VALUE;
+	private static int getLower(int[] vector) {
+		int lower = Integer.MAX_VALUE;
 		for(int i = 0; i < vector.length; i++) {
-			if(vector[i] > higher) {
-				higher = vector[i];
+			if(vector[i] < lower) {
+				lower = vector[i];
 			}
 		}
-		return higher;
+		return lower;
 	}
 
 }
