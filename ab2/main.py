@@ -135,12 +135,12 @@ def right_visada(p1, p2, v):
     return True
 
 
-def visibilityGraph(lis, v):
+def visibilityGraph(vertexes, v):
     g = []
-    for i in range(0, len(lis)):
-        for j in range(0, len(lis)):
-            if i != j and right_visada(lis[i], lis[j], v):
-                edge = (lis[i], lis[j], lis[i].distance(lis[j]))
+    for i in range(0, len(vertexes)):
+        for j in range(0, len(vertexes)):
+            if i != j and right_visada(vertexes[i], vertexes[j], v):
+                edge = (vertexes[i], vertexes[j], vertexes[i].distance(vertexes[j]))
                 if (edge[1], edge[0], edge[2]) not in g:
                     g.append(edge)
     return g
